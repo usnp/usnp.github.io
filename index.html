@@ -73,22 +73,23 @@
 
         <script type="application/javascript">
             const dones = {
-                nathan: 1630098000000,
-                sam1:   1633035600000,
-                sam2:   1634936400000,
+                sam: 1633122000000,
             };
 
+
             document.addEventListener('DOMContentLoaded', () => {
-                const cancel = setInterval(() => {
+                let handle = null;
+
+                const update = () => {
                     const now = new Date();
+
+                    let allDone = true;
 
                     Object.entries(dones).forEach(([name, done]) => {
                         const diff = done - now;
 
-                        if (diff <= 0) {
-                            cancel();
-                            return;
-                        }
+                        if (diff <= 0) return; 
+                        allDone = false;
 
                         const total_hours = diff / 1000 / 3600;
 
@@ -97,7 +98,12 @@
 
                         document.getElementById(name).innerText = `${days} days, ${hours} hour${hours == 1 ? '' : 's'}`;
                     });
-                }, 1000);
+
+                    if (allDone && handle != null) clearInterval(handle);
+                };
+
+                handle = setInterval(update, 1000);
+                update();
             });
         </script>
     </head>
@@ -105,15 +111,7 @@
     <body>
         <div id="title-wrap">
             <div class="title">
-                <h1><span id="nathan">???</span></h1>
-            </div>
-
-            <div class="title">
-                <h1><span id="sam1">???</span></h1>
-            </div>
-
-            <div class="title">
-                <h1><span id="sam2">???</span></h1>
+                <h1><span id="sam">???</span></h1>
             </div>
         </div>
     </body>
