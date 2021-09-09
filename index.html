@@ -70,48 +70,12 @@
                 color: #ffffff;
             }
         </style>
-
-        <script type="application/javascript">
-            const dones = {
-                sam: 1633122000000,
-            };
-
-
-            document.addEventListener('DOMContentLoaded', () => {
-                let handle = null;
-
-                const update = () => {
-                    const now = new Date();
-
-                    let allDone = true;
-
-                    Object.entries(dones).forEach(([name, done]) => {
-                        const diff = done - now;
-
-                        if (diff <= 0) return; 
-                        allDone = false;
-
-                        const total_hours = diff / 1000 / 3600;
-
-                        const days = Math.floor(total_hours / 24);
-                        const hours = Math.floor(total_hours % 24);
-
-                        document.getElementById(name).innerText = `${days} days, ${hours} hour${hours == 1 ? '' : 's'}`;
-                    });
-
-                    if (allDone && handle != null) clearInterval(handle);
-                };
-
-                handle = setInterval(update, 1000);
-                update();
-            });
-        </script>
     </head>
 
     <body>
         <div id="title-wrap">
             <div class="title">
-                <h1><span id="sam">???</span></h1>
+                <h1>nyquist technologies</h1>
             </div>
         </div>
     </body>
